@@ -9,14 +9,14 @@ MongoDB – NoSQL database
 
 Mongo Express – MongoDB web-based admin UI
 
-Redis – Caching / session store
+Redis – Caching
 
-Nginx – Reverse proxy
+Nginx – Reverse proxy / load balancing
 
 Docker & Docker Compose – Containerization & orchestration
 
 
-▶️ How to Run the Project:
+▶️ How to Run the Project on external server:
 
 🔹 Development Mode
     docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
