@@ -1,0 +1,54 @@
+services:
+  node-app:  # first service
+    image: hoss3/node-app-image
+    # container_name: node-app-container
+    # ports:
+      # - 4000:4000
+    env_file:
+      - .env
+    depends_on: # node-app waits till the db runs
+      - mongo-db
+      - redis
+  
+  mongo-db:  # second service
+    image: mongo
+    container_name: mongo-db-container
+    volumes: 
+     - mongo-db:/data/db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  # mongo-express:  # third service
+  #   image: mongo-express
+  #   container_name: mongo-express-container
+  #   restart: always
+  #   ports:
+  #     - 8081:8081
+  #   environment:
+  #     ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo-db:27017/
+  #     ME_CONFIG_BASICAUTH_ENABLED: true
+  #     ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
+  #     ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+  #   depends_on:
+  #     - mongo-db
+  
+  redis:  # forth service
+    image: redis
+    container_name: redis-container
+
+  nginx: # sixth service
+    image: nginx:alpine
+    container_name: nginx-container
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 80:80
+    depends_on:
+      - node-app
+
+volumes:
+    mongo-db:
+      name: mongo-db-volume
+    

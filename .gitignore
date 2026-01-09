@@ -1,0 +1,8 @@
+# folders
+/node_modules
+
+# files
+.env
+
+# editor
+note.md

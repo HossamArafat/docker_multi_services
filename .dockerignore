@@ -1,0 +1,11 @@
+# folders
+/node_modules
+
+# files
+Dockerfile
+docker-compose*
+package-lock.json
+.env
+
+# editor
+note.md
